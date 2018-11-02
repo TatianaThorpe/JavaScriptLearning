@@ -400,35 +400,49 @@ var isDesigner = john.indexOf('designer') === -1 ? 'John is NOT a designer' : 'J
 console.log(isDesigner);
 */
 
+
+
+
+
+
+
+
 /*******************
- * Challenge 3
+ * Challenge 3 my way
  */
 
-// var tipsArray = [];
-// var totalArray = [];
-//
-// function tipCalculator(bill) {
-//
-//     if (bill > 200) {
-//         var tip = bill * 0.1
-//     } else if (bill >= 50 && bill <= 200) {
-//         tip = bill *  0.15
-//     }  else {
-//         tip = bill * 0.2
-//     };
-//
-//     tipsArray.push(tip);
-//     totalArray.push(bill + tip);
-// };
-//
-//
-//
-// tipCalculator(124);
-// tipCalculator(48);
-// tipCalculator(268);
-//
-// console.log(tipsArray);
-// console.log(totalArray);
+var tipsArray = [];
+var totalArray = [];
+
+function tipCalculator(bill) {
+
+    if (bill > 200) {
+        var tip = bill * 0.1
+    } else if (bill >= 50 && bill <= 200) {
+        tip = bill *  0.15
+    }  else {
+        tip = bill * 0.2
+    };
+
+    tipsArray.push(tip);
+    totalArray.push(bill + tip);
+};
+
+
+
+
+
+
+/*******************
+ * Challenge 3 the instructor's way
+ */
+
+tipCalculator(124);
+tipCalculator(48);
+tipCalculator(268);
+
+console.log(tipsArray);
+console.log(totalArray);
 
 
 function tipCalculator(bill) {
