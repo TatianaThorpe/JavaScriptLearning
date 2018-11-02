@@ -428,15 +428,6 @@ function tipCalculator(bill) {
     totalArray.push(bill + tip);
 };
 
-
-
-
-
-
-/*******************
- * Challenge 3 the instructor's way
- */
-
 tipCalculator(124);
 tipCalculator(48);
 tipCalculator(268);
@@ -444,6 +435,12 @@ tipCalculator(268);
 console.log(tipsArray);
 console.log(totalArray);
 
+
+
+
+/*******************
+ * Challenge 3 the instructor's way
+ */
 
 function tipCalculator(bill) {
     var percentage;
