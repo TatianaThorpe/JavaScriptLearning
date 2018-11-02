@@ -551,6 +551,9 @@ var john = {
     }
 };
 
+//the duplicate methods in each of the objects above can be delivered in one method rather than repeating it for
+// each object but I will learn how to do that later
+
 console.log(mark, john);
 
 if (john.calcBMI() > mark.calcBMI()) {
