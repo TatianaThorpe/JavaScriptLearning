@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, prevDice;
 
 init();
 
@@ -23,12 +23,20 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDOM.style.display = 'block';
         diceDOM.src = 'dice-' + dice + '.png';
 
-        // 3. Update the round score IF rolled number is NOT a 1
-        if (dice !== 1) {
+        // 3. Update the round score IF rolled number is NOT a 1 and user hasn't rolled 2 6's in a row
+        if (dice == 6 && dice == prevDice) {
+            console.log('activeplayer: ' + activePlayer + ' | previous dice: ' + prevDice + ' | current dice: ' + dice);
+            scores[activePlayer] = 0;
+            document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+            nextPlayer();
+            } else if (dice !== 1) {
             // Add score
             roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
+            console.log('activeplayer: ' + activePlayer + ' | previous dice: ' + prevDice + ' | current dice: ' + dice);
+            prevDice = dice;
         } else {
+            console.log('activeplayer: ' + activePlayer + ' | previous dice: ' + prevDice + ' | current dice: ' + dice);
             // Next player
             nextPlayer();
         }
@@ -61,6 +69,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 function nextPlayer() {
     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
     roundScore = 0;
+    prevDice = 0;
 
     document.getElementById('current-0').textContent = '0';
     document.getElementById('current-1').textContent = '0';
@@ -76,6 +85,7 @@ function init() {
     scores = [0,0];
     roundScore = 0;
     activePlayer = 0;
+    prevDice = 0;
     gamePlaying = true;
 
     document.querySelector('.dice').style.display = 'none';
