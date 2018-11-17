@@ -337,35 +337,67 @@ console.log(ages);
 
     Question.prototype.displayQuestion = function () {
 
-        {
-            console.log(this.question);
+        console.log(this.question);
 
-            for (var i = 0; i < this.possibleAnswers.length; i++) {
-                console.log(i + ': ' + this.possibleAnswers[i])
-            }
+        for (var i = 0; i < this.possibleAnswers.length; i++) {
+            console.log(i + ': ' + this.possibleAnswers[i])
         }
     };
 
-    Question.prototype.checkAnswer = function (ans) {
-        if (ans === questions[n].correctAnswer) {
+    Question.prototype.checkAnswer = function (ans, callback) {
+        var sc;
+
+        if (ans === this.correctAnswer) {
             console.log('That\'s the correct answer!');
+            sc = callback(true);
         } else {
             console.log('That answer is incorrect');
+            sc = callback(false);
         }
+
+        this.displayScore(sc);
     };
+
+    Question.prototype.displayScore = function (score) {
+        console.log('Current score: ' + score);
+        console.log('--------------------');
+
+    };
+
+    function nextQuestion() {
+        var n = Math.floor(Math.random() * questions.length);
+        console.log('n = : ' + n);
+
+        var question = questions[n];
+
+        question.displayQuestion();
+
+        var guess = (prompt('Please enter the correct answer.'));
+        console.log('entered guess: ' + guess);
+
+        if (guess !== 'exit') {
+            question.checkAnswer(parseInt(guess), keepScore);
+            nextQuestion();
+        }
+    }
+
+    function score() {
+        var sc = 0;
+        return function (correct) {
+            if (correct) {
+                sc++;
+            }
+            return sc;
+        }
+    }
 
     var q1 = new Question('What is the capital of China?', ['Kong Kong', 'Beijing', 'Tokyo'], 1);
     var q2 = new Question('What is the capital of France?', ['Calais', 'Nice', 'Paris'], 2);
     var q3 = new Question('What is the capital of Spain?', ['Madrid', 'Barcelona', 'Seville'], 0);
 
     var questions = [q1, q2, q3];
-    console.log(questions);
 
-    var n = Math.floor(Math.random() * questions.length);
+    var keepScore = score();
 
-    questions[n].displayQuestion();
-
-    var guess = parseInt(prompt('Please enter the correct answer.'));
-
-    questions[n].checkAnswer(guess);
+    nextQuestion();
 })();
