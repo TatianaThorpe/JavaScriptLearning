@@ -365,7 +365,7 @@ console.log(ages);
 
     questions[n].displayQuestion();
 
-    var guess = parseInt(prompt('Please choose the correct answer.'));
+    var guess = parseInt(prompt('Please enter the correct answer.'));
 
     questions[n].checkAnswer(guess);
 })();
